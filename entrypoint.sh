@@ -6,8 +6,11 @@ rm -f /etc/nginx/conf.d/default.conf
 # Create a new NGINX configuration file
 echo "" > /etc/nginx/conf.d/default.conf
 
+# Get the total number of TEST environment variables
+num_tests=$(env | grep -oP 'TEST\d=' | wc -l)
+
 # Loop through the environment variables for domains and containers
-for pair in $(env | grep -oP 'TEST\d=.+' | sort); do
+for ((i = 1; i <= num_tests; i++)); do
     pair="TEST${i}"
     domain_and_container="${!pair}"
 
