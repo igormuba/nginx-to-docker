@@ -7,7 +7,7 @@ rm -f /etc/nginx/conf.d/default.conf
 echo "" > /etc/nginx/conf.d/default.conf
 
 # Loop through the environment variables for domains and containers
-for ((i = 1; i <= 3; i++)); do
+for pair in $(env | grep -oP 'TEST\d=.+' | sort); do
     pair="TEST${i}"
     domain_and_container="${!pair}"
 
